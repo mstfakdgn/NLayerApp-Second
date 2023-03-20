@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NLayer.Repository;
 
@@ -11,9 +12,11 @@ using NLayer.Repository;
 namespace NLayer.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230320084437_product-tag")]
+    partial class producttag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,21 +52,21 @@ namespace NLayer.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6633),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2096),
                             Name = "Kalemler",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6641),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2107),
                             Name = "Kitaplar",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6643),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2109),
                             Name = "Defterler",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -108,7 +111,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6777),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2515),
                             Name = "Kalem 1",
                             Price = 100m,
                             Stock = 20,
@@ -118,7 +121,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6779),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2518),
                             Name = "Kalem 2",
                             Price = 100m,
                             Stock = 20,
@@ -128,7 +131,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 3,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6780),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2520),
                             Name = "Kalem 3",
                             Price = 100m,
                             Stock = 20,
@@ -138,7 +141,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 4,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6781),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2521),
                             Name = "Kalem 4",
                             Price = 100m,
                             Stock = 20,
@@ -148,7 +151,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 5,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6783),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2523),
                             Name = "Kitap 1",
                             Price = 100m,
                             Stock = 20,
@@ -158,7 +161,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 6,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6784),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2524),
                             Name = "Kitap 2",
                             Price = 100m,
                             Stock = 20,
@@ -168,7 +171,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 7,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6785),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2526),
                             Name = "Kitap 3",
                             Price = 100m,
                             Stock = 20,
@@ -178,7 +181,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 8,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6786),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2527),
                             Name = "Kitap 4",
                             Price = 100m,
                             Stock = 20,
@@ -188,7 +191,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 9,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6787),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2528),
                             Name = "Defter 4",
                             Price = 100m,
                             Stock = 20,
@@ -198,7 +201,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 10,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6788),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2533),
                             Name = "Defter 4",
                             Price = 100m,
                             Stock = 20,
@@ -208,7 +211,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 11,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6789),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2534),
                             Name = "Defter 4",
                             Price = 100m,
                             Stock = 20,
@@ -218,7 +221,7 @@ namespace NLayer.Repository.Migrations
                         {
                             Id = 12,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6791),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2536),
                             Name = "Defter 4",
                             Price = 100m,
                             Stock = 20,
@@ -323,73 +326,88 @@ namespace NLayer.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6850),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2736),
                             Name = "Tag1",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6851),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2737),
                             Name = "Tag2",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6852),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2738),
                             Name = "Tag3",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6853),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2739),
                             Name = "Tag4",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6854),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2740),
                             Name = "Tag5",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6854),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2741),
                             Name = "Tag6",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6855),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2743),
                             Name = "Tag7",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 8,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6856),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2744),
                             Name = "Tag8",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6857),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2745),
                             Name = "Tag9",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 10,
-                            CreatedDate = new DateTime(2023, 3, 20, 12, 3, 31, 103, DateTimeKind.Local).AddTicks(6858),
+                            CreatedDate = new DateTime(2023, 3, 20, 11, 44, 37, 488, DateTimeKind.Local).AddTicks(2746),
                             Name = "Tag10",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
+                });
+
+            modelBuilder.Entity("ProductTag", b =>
+                {
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductsId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("ProductTag");
                 });
 
             modelBuilder.Entity("NLayer.Core.Models.Product", b =>
@@ -417,13 +435,13 @@ namespace NLayer.Repository.Migrations
             modelBuilder.Entity("NLayer.Core.Models.ProductTag", b =>
                 {
                     b.HasOne("NLayer.Core.Models.Product", "Product")
-                        .WithMany("ProductTags")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("NLayer.Core.Models.Tag", "Tag")
-                        .WithMany("ProductTags")
+                        .WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -431,6 +449,21 @@ namespace NLayer.Repository.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("ProductTag", b =>
+                {
+                    b.HasOne("NLayer.Core.Models.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NLayer.Core.Models.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("NLayer.Core.Models.Category", b =>
@@ -441,13 +474,6 @@ namespace NLayer.Repository.Migrations
             modelBuilder.Entity("NLayer.Core.Models.Product", b =>
                 {
                     b.Navigation("ProductFeature");
-
-                    b.Navigation("ProductTags");
-                });
-
-            modelBuilder.Entity("NLayer.Core.Models.Tag", b =>
-                {
-                    b.Navigation("ProductTags");
                 });
 #pragma warning restore 612, 618
         }

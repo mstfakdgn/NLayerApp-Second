@@ -108,6 +108,28 @@ namespace Nlayer.API.Controllers
             return CreateActionResult(await service.GetProductsWithCategory());
         }
 
-        
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetProductsWithTags()
+        {
+            return CreateActionResult(await service.GetProductsWithTags());
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetProductWithTags(int productId)
+        {
+            return CreateActionResult(await service.GetProductWithTags(productId));
+        }
+
+        [HttpPut("[action]")]
+        public async Task<IActionResult> AddTagToProduct(int productId, int tagId)
+        {
+            return CreateActionResult(await service.AddTagToProduct(productId, tagId));
+        }
+
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> RemoveTagFromProduct(int productId, int tagId)
+        {
+            return CreateActionResult(await service.RemoveTagFromProduct(productId, tagId));
+        }
     }
 }

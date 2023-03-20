@@ -15,14 +15,16 @@ namespace NLayer.Service.Services
     public class ProductService : Service<Product>, IProductService
     {
         private readonly IProductRepository _repository;
+        private readonly IGenericRepository<Tag> _tagReporsitory;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public ProductService(IGenericRepository<Product> genericRepository, IUnitOfWork unitOfWork, IMapper mapper, IProductRepository productRepository) : base(genericRepository, unitOfWork)
+        public ProductService(IGenericRepository<Product> genericRepository, IUnitOfWork unitOfWork, IMapper mapper, IProductRepository productRepository, IGenericRepository<Tag> tagReporsitory) : base(genericRepository, unitOfWork)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _repository = productRepository;
+            _tagReporsitory = tagReporsitory;
         }
 
         public async Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategory()
@@ -33,5 +35,68 @@ namespace NLayer.Service.Services
             return CustomResponseDto<List<ProductWithCategoryDto>>.Success(200, productsDto);
 
         }
-    }
+
+        public async Task<CustomResponseDto<List<ProductWithTagsDto>>> GetProductsWithTags()
+        {
+            var productsWithTags = await _repository.GetProductsWithTags();
+            var productsDto = _mapper.Map<List<ProductWithTagsDto>>(productsWithTags);
+
+            return CustomResponseDto<List<ProductWithTagsDto>>.Success(200, productsDto);
+        }
+
+        public async Task<CustomResponseDto<ProductWithTagsDto>> GetProductWithTags(int productId)
+        {
+            var product = await _repository.GetProductWithTags(productId);
+
+            var tagDtos = new List<TagDto>();
+            foreach (var productTag in product.ProductTags)
+            {
+                var tag = await _tagReporsitory.GetByIdAsync(productTag.TagId);
+                tagDtos.Add(_mapper.Map<TagDto>(tag));
+            }
+
+            var productWithTags = _mapper.Map<ProductWithTagsDto>(product);
+            productWithTags.Tags = tagDtos;
+
+            return CustomResponseDto<ProductWithTagsDto>.Success(200, productWithTags);
+        }
+
+        public async Task<CustomResponseDto<NoContentDto>> AddTagToProduct(int productId, int tagId)
+        {
+            var product = await _repository.GetByIdAsync(productId);
+            var tag = await _tagReporsitory.GetByIdAsync(tagId);
+
+            var productTag = new ProductTag
+            {
+                ProductId = productId,
+                TagId = tagId,
+                Tag = tag,
+                Product = product
+            };
+
+            if (product == null || tag == null)
+            {
+                throw new Exception("Product or tag could not be found");
+            }
+
+            await _repository.AddTagToProduct(productTag);
+            await _unitOfWork.CommitAsync();
+
+            return CustomResponseDto<NoContentDto>.Success(201);
+        }
+
+        public async Task<CustomResponseDto<NoContentDto>> RemoveTagFromProduct(int productId, int tagId)
+        {
+            var productTag = new ProductTag
+            {
+                ProductId = productId,
+                TagId = tagId
+            };
+
+            await _repository.RemoveTagFromProduct(productTag);
+            await _unitOfWork.CommitAsync();
+
+            return CustomResponseDto<NoContentDto>.Success(201);
+        }
+    } 
 }

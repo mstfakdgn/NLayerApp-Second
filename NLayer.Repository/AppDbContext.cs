@@ -20,9 +20,22 @@ namespace NLayer.Repository
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<ProductTag> ProductTags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            //Foreign Key Many-to-Many
+            modelBuilder.Entity<ProductTag>().HasKey(pt => new { pt.ProductId, pt.TagId });
+            modelBuilder.Entity<ProductTag>()
+                 .HasOne(pt => pt.Product)
+                 .WithMany(p => p.ProductTags)
+                 .HasForeignKey(pt => pt.ProductId);
+            modelBuilder.Entity<ProductTag>()
+                .HasOne(pt => pt.Tag)
+                .WithMany(t => t.ProductTags)
+                .HasForeignKey(pt => pt.TagId);
+
             //Register all configurations(seeds, configurations)
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
