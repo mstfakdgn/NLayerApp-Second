@@ -13,6 +13,7 @@ using NLayer.Service.Validations;
 using System.Text.Json.Serialization;
 using Nlayer.API.Filters;
 using Microsoft.AspNetCore.Mvc;
+using Nlayer.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,6 +60,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCustomException();
 
 app.UseAuthorization();
 
