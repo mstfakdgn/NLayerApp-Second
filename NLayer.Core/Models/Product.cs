@@ -25,5 +25,8 @@ namespace NLayer.Core.Models
 
         public ProductFeature? ProductFeature { get; set; }
 
+        public ICollection<Tag> Tags { get; set; }
+
+
     }
 }
