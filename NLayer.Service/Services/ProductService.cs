@@ -39,9 +39,23 @@ namespace NLayer.Service.Services
         public async Task<CustomResponseDto<List<ProductWithTagsDto>>> GetProductsWithTags()
         {
             var productsWithTags = await _repository.GetProductsWithTags();
-            var productsDto = _mapper.Map<List<ProductWithTagsDto>>(productsWithTags);
 
-            return CustomResponseDto<List<ProductWithTagsDto>>.Success(200, productsDto);
+            var productOutput = new List<ProductWithTagsDto>();
+            foreach (var productDto in productsWithTags)
+            {
+                var tagDtos = new List<TagDto>();
+                foreach (var productTag in productDto.ProductTags)
+                {
+                    var tag = await _tagReporsitory.GetByIdAsync(productTag.TagId);
+                    tagDtos.Add(_mapper.Map<TagDto>(tag));
+                }
+
+                var productWithTags = _mapper.Map<ProductWithTagsDto>(productDto);
+                productWithTags.Tags = tagDtos;
+                productOutput.Add(productWithTags);
+            }
+
+            return CustomResponseDto<List<ProductWithTagsDto>>.Success(200, productOutput);
         }
 
         public async Task<CustomResponseDto<ProductWithTagsDto>> GetProductWithTags(int productId)
