@@ -21,6 +21,7 @@ namespace NLayer.Repository
         public DbSet<ProductFeature> ProductFeatures { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<ProductTag> ProductTags { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

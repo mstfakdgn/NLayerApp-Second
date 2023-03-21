@@ -14,8 +14,36 @@ using System.Text.Json.Serialization;
 using Nlayer.API.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Nlayer.API.Middlewares;
+using Autofac.Extensions.DependencyInjection;
+using Autofac;
+using Nlayer.API.Modules;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//jwt authentication
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    var Key = Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JWT:Key").Value.ToString());
+    o.SaveToken = true;
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration.GetSection("JWT:Issuer").Value.ToString(),
+        ValidAudience = builder.Configuration.GetSection("JWT:Audience").Value.ToString(),
+        IssuerSigningKey = new SymmetricSecurityKey(Key)
+    };
+});
+
 
 // Add services to the container.
 
@@ -32,13 +60,15 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
-builder.Services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
-builder.Services.AddScoped(typeof(IProductService), typeof(ProductService));
-builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
-builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
+builder.Services.AddScoped(typeof(NotFoundFilter<>));
+
+//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+//builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+//builder.Services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
+//builder.Services.AddScoped(typeof(IProductService), typeof(ProductService));
+//builder.Services.AddScoped(typeof(ICategoryRepository), typeof(CategoryRepository));
+//builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
@@ -49,6 +79,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
     }
 ));
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new ServiceRepoModule()));
 
 var app = builder.Build();
 
@@ -63,6 +97,7 @@ app.UseHttpsRedirection();
 
 app.UseCustomException();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
